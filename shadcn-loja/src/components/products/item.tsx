@@ -3,26 +3,31 @@ import { Product } from "@/types/product";
 import { Button } from "../ui/button";
 import { toast } from "sonner";
 import { Item } from "@radix-ui/react-dropdown-menu";
+import { useCartStore } from "@/stores/cart-store";
 
 type Props = {
     item: Product;
 }
 
-const handleAddButton = (item: Product) => {
-    toast.success('Adicionado ao carrinho!',
-        {
-            description: item.name,
-            action: {
-                label: 'Ver carrinho',
-                onClick: () => {
-                    console.log('Ir para o carrinho');
+export const ProductItem = ({ item }: Props) => {
+
+    const { upsertCartItem } = useCartStore(state => state);
+
+    const handleAddButton = (item: Product) => {
+        upsertCartItem(item, 1);
+        toast.success('Adicionado ao carrinho!',
+            {
+                description: item.name,
+                action: {
+                    label: 'Ver carrinho',
+                    onClick: () => {
+                        console.log('Ir para o carrinho');
+                    }
                 }
             }
-        }
-    );
-}
+        );
+    }
 
-export const ProductItem = ({ item }: Props) => {
     return (
         <div>
             <div className="overflow-hidden rounded-md">
