@@ -2,7 +2,6 @@
 import { Product } from "@/types/product";
 import { Button } from "../ui/button";
 import { toast } from "sonner";
-import { Item } from "@radix-ui/react-dropdown-menu";
 import { useCartStore } from "@/stores/cart-store";
 
 type Props = {

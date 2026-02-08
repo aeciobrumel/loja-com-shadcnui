@@ -1,4 +1,4 @@
-import { products } from '@/components/products/products';
+
 import { Cart } from "@/types/cart";
 import { Product } from "@/types/product";
 import { create } from "zustand";
@@ -17,9 +17,8 @@ const initialState: StatesCart ={
 
 export const useCartStore = create<StatesCart & Actions>()(set =>({
  ...initialState,
-     upsertCartItem:(product, quantity) =>set(state => 
-        {
-            let newCart = state.cart;
+     upsertCartItem:(product, quantity) => set(state => {
+            let newCart = [...state.cart];
 
             let productIndex = newCart.findIndex(item => item.product.id === product.id);
 
@@ -30,7 +29,7 @@ export const useCartStore = create<StatesCart & Actions>()(set =>({
 
             newCart[productIndex].quantity += quantity;
 
-            if(newCart[productIndex].quantity <=0){
+            if(newCart[productIndex].quantity <= 0){
                 newCart = newCart.filter(item => item.product.id !== product.id );   
             }
 
