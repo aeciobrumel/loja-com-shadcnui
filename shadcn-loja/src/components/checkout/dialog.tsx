@@ -6,15 +6,14 @@ import { Progress } from "../ui/progress"
 import { StepAddress } from "./step-address";
 import { StepUser } from "./step-user";
 import { StepFinish } from "./step-finish";
-
-type Steps = 'user' | 'address' | 'finish';
+import { CheckoutSteps } from "@/types/checkout-steps";
 
 type Props = {
     open: boolean;
     onOpenChange: (open: boolean) => void;
 }
 export const CheckoutDialog = ({ open, onOpenChange }: Props) => {
-    const [step, setStep] = useState<Steps>('user');
+    const [step, setStep] = useState<CheckoutSteps>('user');
     let progressPct = 0;
     switch (step) {
         case 'user': progressPct = 30;
