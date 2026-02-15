@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import z from "zod";
-import { Form, FormControl, FormField, FormItem, FormLabel } from "../ui/form";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
@@ -89,20 +89,21 @@ export const StepAddress = ({ setStep }: Props) => {
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>Estado</FormLabel>
-                                <Select value={field.value} onValueChange={field.onChange}>
-                                    <FormControl>
+                                <FormControl>
+                                    <Select value={field.value} onValueChange={field.onChange}>
                                         <SelectTrigger>
                                             <SelectValue placeholder="Selecione o estado" />
                                         </SelectTrigger>
-                                    </FormControl>
-                                    <SelectContent>
-                                        {ESTADOS.map((estado) => (
-                                            <SelectItem key={estado.uf} value={estado.uf}>
-                                                {estado.nome}
-                                            </SelectItem>
-                                        ))}
-                                    </SelectContent>
-                                </Select>
+                                        <SelectContent>
+                                            {ESTADOS.map((estado) => (
+                                                <SelectItem key={estado.uf} value={estado.uf}>
+                                                    {estado.nome}
+                                                </SelectItem>
+                                            ))}
+                                        </SelectContent>
+                                    </Select>
+                                </FormControl>
+                                <FormMessage />
                             </FormItem>
                         )}
                     />
@@ -112,24 +113,25 @@ export const StepAddress = ({ setStep }: Props) => {
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>Cidade</FormLabel>
-                                <Select
-                                    value={field.value}
-                                    onValueChange={field.onChange}
-                                    disabled={!uf}
-                                >
-                                    <FormControl>
+                                <FormControl>
+                                    <Select
+                                        value={field.value}
+                                        onValueChange={field.onChange}
+                                        disabled={!uf}
+                                    >
                                         <SelectTrigger>
                                             <SelectValue placeholder="Selecione a cidade" />
                                         </SelectTrigger>
-                                    </FormControl>
-                                    <SelectContent>
-                                        {cities.map((city) => (
-                                            <SelectItem key={city} value={city}>
-                                                {city}
-                                            </SelectItem>
-                                        ))}
-                                    </SelectContent>
-                                </Select>
+                                        <SelectContent>
+                                            {cities.map((city) => (
+                                                <SelectItem key={city} value={city}>
+                                                    {city}
+                                                </SelectItem>
+                                            ))}
+                                        </SelectContent>
+                                    </Select>
+                                </FormControl>
+                                <FormMessage />
                             </FormItem>
                         )}
                     />
@@ -143,6 +145,8 @@ export const StepAddress = ({ setStep }: Props) => {
                                 <FormControl>
                                     <Input {...field} />
                                 </FormControl>
+                                <FormMessage />
+
                             </FormItem>
                         )}
                     />
@@ -155,7 +159,9 @@ export const StepAddress = ({ setStep }: Props) => {
                                 <FormControl>
                                     <Input {...field} />
                                 </FormControl>
+                                <FormMessage />
                             </FormItem>
+
                         )}
                     />
                     <FormField
@@ -167,6 +173,7 @@ export const StepAddress = ({ setStep }: Props) => {
                                 <FormControl>
                                     <Input {...field} />
                                 </FormControl>
+                                <FormMessage />
                             </FormItem>
                         )}
                     />
@@ -179,6 +186,7 @@ export const StepAddress = ({ setStep }: Props) => {
                                 <FormControl>
                                     <Input {...field} />
                                 </FormControl>
+                                <FormMessage />
                             </FormItem>
                         )}
                     />
